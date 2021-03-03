@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model BookListViewModel
+    <!--Brings in the model for books and allows us to query-->
+<br />
+<div class="text-center">
+    <h3>Book Database</h3>
+</div>
+
+<table class="table table-striped table-hover ">
+    <thead class="thead-dark">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>ISBN</th>
+            <th>Classification</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Page Count</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.Books) //for each item in our list, we print the information about the book in this table
+        {
+            <partial name="CategorySummary" model="x" />
+        }
+    </tbody>
+</table>
+
+<div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
+     page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary" page-url-category="@Model.CurrentCategory"
+     class="btn-group pull-right m-1">
+</div>

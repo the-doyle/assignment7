@@ -1,0 +1,12 @@
+﻿@model Book
+
+<tr>
+    <td>@Model.BookTitle</td>
+    <td>@Model.Author</td>
+    <td>@Model.Publisher</td>
+    <td>@Model.ISBN</td>
+    <td>@Model.Classification</td>
+    <td>@Model.Category</td>
+    <td>@String.Format("${0:0.00}", Model.BookPrice)</td>
+    <td>@Model.PageCount</td>
+</tr>
