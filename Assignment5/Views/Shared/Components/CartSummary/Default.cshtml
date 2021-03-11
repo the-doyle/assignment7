@@ -1,0 +1,15 @@
+﻿@model Cart
+<div class="">
+    @if (Model.Lines.Count() > 0)
+    {
+        <small class="navbar-text">
+            <b>Your cart:</b>
+            @Model.Lines.Sum(x => x.Quantity) item(s)
+            @String.Format("${0:0.00}", Model.ComputeTotalSum())
+        </small>
+    }
+    <a class="btn btn-sm btn-secondary navbar-btn" asp-page="/Purchase"
+       asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">
+        <i>Cart</i>
+    </a>
+</div>

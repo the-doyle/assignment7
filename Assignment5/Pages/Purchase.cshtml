@@ -1,0 +1,53 @@
+﻿@page
+
+@model Assignment5.Pages.PurchaseModel
+
+@{
+}
+
+<h3>Your Cart</h3>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th class="text-left">Book</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Subtotal</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var line in Model.Cart.Lines)
+        {
+        <tr>
+            <td class="text-left">@line.Book.BookTitle</td>
+            <td class="text-center">@line.Quantity</td>
+            <td class="text-right">@String.Format("${0:0.00}", line.Book.BookPrice)</td>
+            <td class="text-right">@(String.Format("${0:0.00}", (line.Book.BookPrice * line.Quantity)))</td>
+            <td class="text-center">
+                <form asp-page-handler="Remove" method="post"> <!--This adds a button that calls the Remove method-->
+                    <input type="hidden" name="ISBN"
+                           value="@line.Book.ISBN" />
+                    <input type="hidden" name="returnUrl"
+                           value="@Model.ReturnUrl" />
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Remove
+                    </button>
+                </form>
+            </td>
+
+        </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right font-weight-bold">Total:</td>
+            <td class="text-right font-weight-bold">@String.Format("${0:0.00}", Model.Cart.ComputeTotalSum())</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="text-center">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Continue Shopping</a>
+</div>
