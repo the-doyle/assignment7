@@ -20,13 +20,14 @@
             <th>Category</th>
             <th>Price</th>
             <th>Page Count</th>
+            <th>Purchase</th>
 
         </tr>
     </thead>
     <tbody>
         @foreach (var x in Model.Books) //for each item in our list, we print the information about the book in this table
         {
-            <partial name="CategorySummary" model="x" />
+            <partial name="CategorySummary" model="x" /> //CategorySummary is a partial view in the shared folder
         }
     </tbody>
 </table>

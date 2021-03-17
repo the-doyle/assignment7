@@ -9,4 +9,17 @@
     <td>@Model.Category</td>
     <td>@String.Format("${0:0.00}", Model.BookPrice)</td>
     <td>@Model.PageCount</td>
+    <td>
+        <form id="@Model.ISBN" asp-page="/Purchase" method="post">
+            <input type="hidden" asp-for="ISBN" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <span class="card-text p-1">
+                <button type="submit" class="btn-success btn-sm">
+                    Add to cart
+                </button>
+            </span>
+        </form>
+    </td>
 </tr>
+
+

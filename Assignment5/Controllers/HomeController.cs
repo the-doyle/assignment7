@@ -24,19 +24,19 @@ namespace Assignment5.Controllers
 
         public int PageSize = 5; //display 5 items per page :) 
 
-        public IActionResult Index(string category, int page = 1) //default page is 1 
+        public IActionResult Index(string category, int pageNum = 1) //default page is 1 
         {
             return View(new BookListViewModel
             {
                 Books = _repository.Books
                     .Where(b => category == null || b.Category == category) //if the category is null, or if the entered category is the book's category, display the book
                     .OrderBy(p => p.ISBN)
-                    .Skip((page - 1) * PageSize)
+                    .Skip((pageNum - 1) * PageSize)
                     .Take(PageSize)
                 ,
                 PagingInfo = new PagingInfo
                 {
-                    CurrentPage = page,
+                    CurrentPage = pageNum,
                     ItemsPerPage = PageSize,
                     TotalNumItems = category == null ? _repository.Books.Count() :
                         _repository.Books.Where (x => x.Category == category).Count() //this line and the one above help us only display the amount of pages required for a category
